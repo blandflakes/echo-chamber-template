@@ -17,6 +17,12 @@ To test with an actual echo, configure the Jetty adapter with a self-signed cert
 
 When you're ready to publish, configure the Jetty adapter with a valid certificate, and follow the instructions [here](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/publishing-an-alexa-skill).
 
+## TODO
+* Cert discovery? Maybe something I shouldn't provide here. OpenShift will perform HTTPS and forward the traffic to port 8080. Many nginx setups do similarly. Possibly just document setting up certs in Jetty.
+* Middleware for request verification
+* Document testing strategies (service tester, tuning fork)
+* README, test directories, etc in template
+
 ## License
 
 Copyright © 2015 blandflakes
