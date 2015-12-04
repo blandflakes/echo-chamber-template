@@ -22,7 +22,7 @@ Today, you can test your app's behavior in two ways:
 
 Read more [here](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/testing-an-alexa-skill).
 
-In the future, I plan to release a simulator that can run in the REPL, exercising an app in isolation from its service pieces, but simulating how ALexa would behave for a given input.
+In the future, I plan to release a simulator that can run in the REPL, exercising an app in isolation from its service pieces, but simulating how Alexa would behave for a given input.
 
 ## Publishing
 When you're ready to publish, follow the instructions [here](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/publishing-an-alexa-skill).
