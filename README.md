@@ -1,8 +1,9 @@
 # echo-chamber-template
 
+[![Clojars Project](http://clojars.org/echo-chamber/lein-template/latest-version.svg)](http://clojars.org/echo-chamber/lein-template)
+
 A leiningen template for generating ring echo app servers.
 
-[![Clojars Project](http://clojars.org/echo-chamber/lein-template/latest-version.svg)](http://clojars.org/echo-chamber/lein-template)
 
 ## Usage
 

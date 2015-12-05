@@ -5,7 +5,7 @@
 (defn hello-world
   [session]
   (response/respond session {:should-end? true
-                             :speech (response/simple-speech "Hello world!")
+                             :speech (response/plaintext-speech "Hello world!")
                              :card (response/simple-card "Hello world" "Request received." "Goodbye!")}))
 
 ; FIXME: Implement your own logic below!
