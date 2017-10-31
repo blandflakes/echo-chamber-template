@@ -41,10 +41,10 @@ Many platform-as-service offerings will provide SSL for you. Other setups would 
 
 
 ## Request Validation
-Amazon also requires that you [validate incoming requests](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-web-service#Verifying that the Request was Sent by Alexa). The [echo-chamber-middleware](https://github.com/blandflakes/echo-chamber-middleware) library provides a bare-bones version of this functionality. There are lines in your `ring.clj` file that are commented out that enable this validation. When turning these on, testing locally or with curl will not be possible (see "Testing" above).
+Amazon also requires that you [validate incoming requests](https://developer.amazon.com/docs/custom-skills/host-a-custom-skill-as-a-web-service.html#verifying-that-the-request-was-sent-by-alexa). The [echo-chamber-middleware](https://github.com/blandflakes/echo-chamber-middleware) library provides a bare-bones version of this functionality. There are lines in your `ring.clj` file that are commented out that enable this validation. When turning these on, testing locally or with curl will not be possible (see "Testing" above).
 
 ## License
 
-Copyright © 2015 blandflakes
+Copyright © 2015-2017 blandflakes
 
 Distributed under the MIT License.

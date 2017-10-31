@@ -3,16 +3,15 @@
             [echo.response :as response]))
 
 (defn hello-world
-  []
+  [_request]
   (response/respond {:should-end? true
                      :speech (response/plaintext-speech "Hello world!")
                      :card (response/simple-card "Hello world" "Request received. Goodbye!")}))
 
 ; FIXME: Implement your own logic below!
-(deftype App []
-  echo/IEchoApp
-  (on-launch [this request session] (hello-world))
-  (on-intent [this request session] (hello-world))
-  (on-end [this request session] (hello-world)))
+(def app {
+          :requests {echo/launch hello-world
+                     echo/end-session hello-world}
+          :intents {"HelloWorldIntent" hello-world}})
 
-(def app-handler (echo/request-dispatcher (App.)))
+(def app-handler (echo/request-dispatcher app))
