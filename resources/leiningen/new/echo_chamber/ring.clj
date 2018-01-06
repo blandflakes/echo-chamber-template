@@ -19,6 +19,15 @@
     (wrapper handler)
     handler))
 
+(defn- env-boolean
+  "Environ variables are always strings. Function to pull a variable and try to match it to true. Any string that
+  isn't 'true' will return false. Is strict - if you have a string that isn't a boolean, it will throw an
+  exception. If nothing is set, it will return false."
+  [env-variable]
+  (if-let [found (env env-variable)]
+    (boolean (Boolean/valueOf found))
+    false))
+
 (defn wrap-handler
   "Generates a ring handler that parses HTTP requests and sends the parsed JSON body
    to the provided app-handler.
@@ -26,9 +35,9 @@
   [app-handler]
   (-> app-handler
       contact-point
-      (conditional-wrap (env :verify-timestamp) wrap-timestamp-verifier)
+      (conditional-wrap (env-boolean :verify-timestamp) wrap-timestamp-verifier)
       wrap-json-response
       (wrap-defaults api-defaults)
       wrap-json-body
-      (conditional-wrap (env :verify-certificate) wrap-signature-verifier)
+      (conditional-wrap (env-boolean :verify-certificate) wrap-signature-verifier)
       logger.timbre/wrap-with-logger))

@@ -12,8 +12,8 @@
                            [ring/ring-json "0.4.0"]
                            [ring-logger-timbre "0.7.6"]]
             :plugins [[lein-environ "1.1.0"]]
-            :profiles {:dev  {:env {:verify-timestamp   false
-                                    :verify-certificate false}}
-                       :test {:env {:verify-timestamp   false
-                                    :verify-certificate false}}}
+            :profiles {:dev  {:env {:verify-timestamp   "false"
+                                    :verify-certificate "false"}}
+                       :test {:env {:verify-timestamp   "false"
+                                    :verify-certificate "false"}}}
             :main {{namespace}}.core)
