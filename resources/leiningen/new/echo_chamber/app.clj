@@ -1,4 +1,4 @@
-(ns {{namespace}} .app
+(ns {{namespace}}.app
   (:require [echo.core :as echo]
     [echo.response :as response]))
 

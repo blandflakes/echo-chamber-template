@@ -1,17 +1,23 @@
 (ns {{namespace}}.ring
   (:require [echo-chamber-middleware.authentication :refer [wrap-signature-verifier wrap-timestamp-verifier]]
-            [ring.logger.timbre :as logger.timbre]
-            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
-            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
-            [ring.util.response :as ring-response]))
+    [environ.core :refer [env]]
+    [ring.logger.timbre :as logger.timbre]
+    [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
+    [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+    [ring.util.response :as ring-response]))
 
-(defn contact-point
+(defn- contact-point
   "Manages the contact point between ring middleware and the echo app router.
    Extracts the echo request from the ring request's body, and wraps the echo
    response in a ring response."
   [handler]
   (fn [request]
     (-> request :body handler ring-response/response)))
+
+(defn- conditional-wrap [handler condition wrapper]
+  (if condition
+    (wrapper handler)
+    handler))
 
 (defn wrap-handler
   "Generates a ring handler that parses HTTP requests and sends the parsed JSON body
@@ -20,11 +26,9 @@
   [app-handler]
   (-> app-handler
       contact-point
-      ; TODO uncomment this for certification
-      ; wrap-timestamp-verifier
+      (conditional-wrap (env :verify-timestamp) wrap-timestamp-verifier)
       wrap-json-response
       (wrap-defaults api-defaults)
       wrap-json-body
-      ; TODO uncomment this for certification
-      ; wrap-signature-verifier
+      (conditional-wrap (env :verify-certificate) wrap-signature-verifier)
       logger.timbre/wrap-with-logger))
