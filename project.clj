@@ -1,4 +1,4 @@
-(defproject echo-chamber/lein-template "0.1.11"
+(defproject echo-chamber/lein-template "0.2.0"
   :description "Generates a simple ring application for serving an Alexa skill"
   :url "https://github.com/blandflakes/echo-chamber-template"
   :license {:name "MIT License"

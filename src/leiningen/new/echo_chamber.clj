@@ -15,6 +15,5 @@
              ["project.clj" (render "project.clj" data)]
              ["src/{{sanitized}}/app.clj" (render "app.clj" data)]
              ["src/{{sanitized}}/core.clj" (render "core.clj" data)]
-             ["src/{{sanitized}}/ring.clj" (render "ring.clj" data)]
              ["README.md" (render "README.md" data)]
              ["test/{{sanitized}}/app_test.clj" (render "test.clj" data)])))

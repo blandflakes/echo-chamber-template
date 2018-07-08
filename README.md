@@ -10,7 +10,7 @@ A leiningen template for generating ring echo app servers.
     lein new echo-chamber <app name>
     lein run
 
-The server can be tested by POSTing JSON Echo requests to `localhost:8080`
+The server can be tested by POSTing JSON Echo requests to `localhost:8080/hello`
 
 In general, you'll need to edit the `app` namespace to provide actual functionality for your app. For more information on building the app, see [echo-chamber](https://github.com/blandflakes/echo-chamber).
 
@@ -31,21 +31,15 @@ When you're ready to publish, follow the instructions [here](https://developer.a
 ## Certificates
 Amazon requires that your service is secured with a valid certificate. See [this resource](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/registering-and-managing-alexa-skills-in-the-developer-portal#About%20the%20SSL%20Options) for more information.
 
-Many platform-as-service offerings will provide SSL for you. Other setups would involve using a web server like nginx as a reverse SSL proxy. You can use the built-in Jetty to expose this service over SSL like this:
+Many platform-as-service offerings will provide SSL for you. Other setups would involve using a web server like nginx as a reverse SSL proxy.
 
-    (defn main-
-      []
-      (jetty/run-jetty handler {:ssl-port 443
-                                :keystore "path to jks"
-                                :key-password "keystore password"}))
-
+Currently, there is no support for configuring SSL on the app server.
 
 ## Request Validation
-Amazon also requires that you [validate incoming requests](https://developer.amazon.com/docs/custom-skills/host-a-custom-skill-as-a-web-service.html#verifying-that-the-request-was-sent-by-alexa). The [echo-chamber-middleware](https://github.com/blandflakes/echo-chamber-middleware) library provides a bare-bones version of this functionality. These validators can be configured using `environ`. When deploying, make sure to set them with something like:
+Amazon also requires that you [validate incoming requests](https://developer.amazon.com/docs/custom-skills/host-a-custom-skill-as-a-web-service.html#verifying-that-the-request-was-sent-by-alexa). The server component
+vends functionality for those. To turn them on, just include them in the list of "verifiers" when you construct the server, for example:
 
-    java -jar app.jar -Dverify.timestamp=true -Dverify.certificate=true
-
-These are disabled in your project's `project.clj` file by default. When turning these on, testing locally or with curl will not be possible (see "Testing" above for other options).
+    :verifiers [(signature/verifier) (timestamp/verifier)
 
 ## License
 
